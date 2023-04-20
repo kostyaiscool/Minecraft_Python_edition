@@ -4,7 +4,6 @@ from map_manager import *
 from player import *
 from panda3d.core import TextNode
 from direct.gui.OnscreenText import OnscreenText
-from math import *
 
 panda3d.core.load_prc_file_data('', 'load-display pandadx9')
 class Showbase_but_better(ShowBase):
@@ -16,7 +15,7 @@ class Showbase_but_better(ShowBase):
 game = Showbase_but_better()
 game.run()
 # timer = 0
-# tick30 = 0
+# tick30 = 0wwwwwwwww
 # delta = 1
 # fps = 0
 # def fps(last_tick30):

@@ -1,3 +1,5 @@
+from math import *
+import sys
 class Player():
     def __init__(self, position, map_link):
         self.map_link = map_link
@@ -9,6 +11,7 @@ class Player():
         self.events()
         # self.speed_y = 0.2
         taskMgr.add(self.gravity, 'gravity')
+        taskMgr.add(self.depth_limits, 'depth_limit')
     def from_first_face_camera(self):
         base.camera.reparentTo(self.player)
         base.disableMouse()
@@ -33,8 +36,8 @@ class Player():
         base.accept('q', self.look_left)
         base.accept('e'+"-repeat", self.look_right)
         base.accept('e', self.look_right)
-        base.accept('w'+"-repeat", self.move(5))
-        base.accept('w', self.move(5))
+        base.accept('w'+"-repeat", self.move)
+        base.accept('w', self.move)
     def look_left(self):
         angle = self.player.getH()
         print(angle)
@@ -43,6 +46,11 @@ class Player():
         angle = self.player.getH()
         print(angle)
         self.player.setH((angle - 5)%360)
-    def move(self, steps):
-        self.player.setX(getX() + steps * sin(angle))
-        self.player.setY(getY() + steps * cos(angle))
+    def move(self):
+        angle = self.player.getH()
+        self.player.setX(self.player.getX() - 1 * sin(angle))
+        self.player.setY(self.player.getY() - 1 * cos(angle))
+    def depth_limits(self, task):
+        if self.player.getZ() < -100:
+            sys.exit()
+        return task.again
