@@ -16,21 +16,21 @@ class Map_manager:
         self.model.setPos(position)
         self.model.setTag('at', str(position))
     def render_map(self, file_name):
-        for y in range(10, 40):
-            for x in range(40):
-                self.block_create((x, y, 0), 'block.egg', 'Wood.jpg')
-        # with open(file_name, 'r') as file:
-        #     for line in file:
-        #         line = line.split(' ')
-        #         y = 0
-        #         del line[-1]
-        #         for block in line:
-        #             x = 0
-        #             for item in range(int(block)):
-        #                 for z in range(item):
-        #                     self.block_create((x, y, z), 'block.egg', 'Wood.jpg')
-        #                 x += 1
-        #             y += 1
+        # for y in range(10, 40):
+        #     for x in range(40):
+        #         self.block_create((x, y, 0), 'block.egg', 'Wood.jpg')
+        with open(file_name, 'r') as file:
+            for line in file:
+                line = line.split(' ')
+                y = 0
+                del line[-1]
+                for block in line:
+                    x = 0
+                    for item in range(int(block)):
+                        for z in range(item):
+                            self.block_create((x, y, z), 'block.egg', 'Wood.jpg')
+                        x += 1
+                    y += 1
     def is_block_at(self, position):
         if self.branch.findAllMatches('=at=' + str(position)):
             return True
@@ -38,3 +38,8 @@ class Map_manager:
             return False
     def create_branch(self):
         self.branch = render.attachNewNode('map_branch')
+    def break_block(self, position):
+        blocks = self.branch.findAllMatches('=at=' + str(position))
+        for block in blocks:
+            if block:
+                block.removeNode()
