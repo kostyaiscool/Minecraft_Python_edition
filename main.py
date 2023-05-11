@@ -15,7 +15,7 @@ SCREEN_HEIGHT = 1080 - 60
 # show fps
 loadPrcFileData('', f'win-size {SCREEN_WIDTH} {SCREEN_HEIGHT} show-frame-rate-meter ')
 
-panda3d.core.load_prc_file_data('', 'load-display pandadx9')
+# panda3d.core.load_prc_file_data('', 'load-display pandadx9')
 class Showbase_but_better(ShowBase):
     def __init__(self):
         super().__init__(self)

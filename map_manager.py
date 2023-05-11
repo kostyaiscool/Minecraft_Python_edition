@@ -28,7 +28,7 @@ class Map_manager:
                     x = 0
                     for item in range(int(block)):
                         for z in range(item):
-                            self.block_create((x, y, z), 'block.egg', 'Wood.jpg')
+                            self.block_create((x, y, z), 'block', 'Wood.jpg')
                         x += 1
                     y += 1
     def is_block_at(self, position):

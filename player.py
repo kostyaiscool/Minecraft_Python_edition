@@ -11,7 +11,7 @@ class Player():
         self.player.setScale(0.3)
         # self.player.setColor((1, 0.5, 0, 1))
         self.player.reparentTo(render)
-        self.from_first_face_camera()
+        # self.from_first_face_camera()
         self.events()
         self.lastMouseX, self.lastMouseY = 0, 0
         self.rotateX, self.rotateY = 0, 0
@@ -118,11 +118,23 @@ class Player():
         return task.again
     def move_back(self):
         self.move((self.player.getH() + 180)%360)
+        currentAnim = self.player.getCurrentAnim()
+        if currentAnim != "walk":
+            self.player.loop("walk")
     def move_front(self):
+        currentAnim = self.player.getCurrentAnim()
+        if currentAnim != "run":
+            self.player.loop("run")
         self.move(self.player.getH())
     def move_left(self):
+        currentAnim = self.player.getCurrentAnim()
+        if currentAnim != "walk":
+            self.player.loop("walk")
         self.move((self.player.getH() + 90)%360)
     def move_right(self):
+        currentAnim = self.player.getCurrentAnim()
+        if currentAnim != "walk":
+            self.player.loop("walk")
         self.move((self.player.getH() + 270)%360)
     def delete_block(self):
         x_from = int(self.player.getX())
