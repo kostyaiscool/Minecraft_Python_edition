@@ -1,12 +1,15 @@
 from math import *
 import sys
 from direct.gui.DirectGui import DirectButton, DirectFrame
+from direct.actor.Actor import Actor
 class Player():
     def __init__(self, position, map_link):
         self.map_link = map_link
-        self.player = loader.loadModel('smiley')
+        # self.player = loader.loadModel('source/')
+        self.player = Actor('source/ralph', {'run':'source/ralph-run', 'walk':'source/ralph-walk'})
         self.player.setPos(position)
-        self.player.setColor((1, 0.5, 0, 1))
+        self.player.setScale(0.3)
+        # self.player.setColor((1, 0.5, 0, 1))
         self.player.reparentTo(render)
         self.from_first_face_camera()
         self.events()
@@ -17,13 +20,13 @@ class Player():
         # self.speed_y = 0.2
         taskMgr.add(self.gravity, 'gravity')
         taskMgr.add(self.depth_limits, 'depth_limit')
-        taskMgr.add(self.mouseTask, 'mouse_dir_get')
+        # taskMgr.add(self.mouseTask, 'mouse_dir_get')
         self.pause_menu()
     def from_first_face_camera(self):
-        base.camera.reparentTo(self.player)
         base.disableMouse()
+        base.camera.reparentTo(self.player)
         base.camera.setH(180)
-        base.camera.setZ(1.5)
+        base.camera.setPos(0, -1, 0.7)
     def gravity(self, task):
         x_from = int(self.player.getX())
         y_from = int(self.player.getY())        
